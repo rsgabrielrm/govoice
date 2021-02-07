@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ config('app.name', 'GoVoice') }}</title>
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
@@ -29,6 +29,27 @@
 
             <!-- Page Content -->
             <main>
+                @foreach ($errors->all() as $msg)
+                    @component('components.alert')
+                        @slot('type', 'error')
+                        @slot('text', $msg)
+                    @endcomponent
+                @endforeach
+
+                @if (!$errors->any() && $error = session('error'))
+                    @component('components.alert')
+                        @slot('type', 'error')
+                        @slot('text', $error)
+                    @endcomponent
+                @endif
+
+                @if ($success = session('success'))
+                    @component('components.alert')
+                        @slot('type', 'success')
+                        @slot('text', $success)
+                    @endcomponent
+                @endif
+
                 {{ $slot }}
             </main>
         </div>
