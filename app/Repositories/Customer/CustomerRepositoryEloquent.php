@@ -14,4 +14,9 @@ class CustomerRepositoryEloquent extends BaseRepository implements CustomerRepos
         $this->model = $model;
     }
 
+    public function getByUserIdAndPaginate($user_id, $perPage = 10)
+    {
+        return $this->model->where('user_id', $user_id)
+                            ->paginate($perPage);
+    }
 }

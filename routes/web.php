@@ -17,8 +17,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('dashboard', \App\Http\Controllers\DashboardController::class)
-        ->name('dashboard')
-        ->middleware(['auth']);
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('dashboard', \App\Http\Controllers\DashboardController::class)
+        ->name('dashboard');
+
+    Route::resource('customer', \App\Http\Controllers\CustomerController::class)
+        ->except('show');
+
+});
+
+
+
 
 require __DIR__.'/auth.php';
