@@ -22,6 +22,7 @@ Route::group(['middleware' => ['auth']], function () {
         ->name('dashboard');
 
     Route::resource('customer', \App\Http\Controllers\CustomerController::class)
+    Route::resource('customers', \App\Http\Controllers\CustomerController::class)
         ->except('show');
 
 });

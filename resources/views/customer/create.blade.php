@@ -11,11 +11,8 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="h-screen">
 
-                        <form method="POST" action="{{ route('customer.store') }}">
+                        <form method="POST" action="{{ route('customers.store') }}">
                         @csrf
-                            <div>
-                                <x-auth-validation-errors class="mb-4" :errors="$errors" />
-                            </div>
                             <div>
                                 <x-label for="name" :value="__('Name')" />
 

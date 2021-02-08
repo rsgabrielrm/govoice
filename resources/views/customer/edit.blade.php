@@ -11,7 +11,7 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="h-screen">
 
-                        <form method="POST" action="{{ route('customer.update', $customer->id) }}">
+                        <form method="POST" action="{{ route('customers.update', $customer->id) }}">
                             @method('PUT')
                             @csrf
                             <div>

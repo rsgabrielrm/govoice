@@ -40,7 +40,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        return view('customer.create');
+        return view('customers.create');
     }
 
     /**
@@ -57,7 +57,7 @@ class CustomerController extends Controller
 
         $this->customerRepository->store($data);
 
-        return redirect()->route('customer.index')->withSuccess("Customer successfully registered");
+        return redirect()->route('customers.index')->withSuccess("Customer successfully registered");
     }
 
     /**
