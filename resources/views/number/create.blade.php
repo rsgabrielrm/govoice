@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Customers - create') }}
+            {{ __('Numbers - create') }}
         </h2>
     </x-slot>
 
@@ -11,18 +11,23 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="h-screen">
 
-                        <form method="POST" action="{{ route('customers.store') }}">
+                        <form method="POST" action="{{ route('numbers.store') }}">
                         @csrf
                             <div>
-                                <x-label for="name" :value="__('Name')" />
+                                <x-label for="name" :value="__('Customer')" />
 
-                                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
+                                <select id="customer_id" name="customer_id" class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                    @foreach($customers as $customer)
+                                        <option class="py-1" value="{{ $customer->id }}" >{{ $customer->name }}</option>
+                                    @endforeach
+                                </select>
+
                             </div>
 
                             <div class="mt-4">
-                                <x-label for="document" :value="__('Document')" />
+                                <x-label for="number" :value="__('Number')" />
 
-                                <x-input id="document" class="block mt-1 w-full" type="text" name="document" :value="old('document')" required />
+                                <x-input id="number" class="block mt-1 w-full" type="text" name="number" value="{{ old('number')}}" required />
                             </div>
 
                             <div class="flex items-center justify-end mt-4">
