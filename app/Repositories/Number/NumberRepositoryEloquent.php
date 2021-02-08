@@ -24,4 +24,10 @@ class NumberRepositoryEloquent extends BaseRepository implements NumberRepositor
          })->with('customer')->paginate($perPage);
     }
 
+    public function getAllNumbersByCustomerIdAndPaginate($customerId, $perPage = 10)
+    {
+        return $this->model->where('customer_id', $customerId)
+                            ->with('customer')
+                            ->paginate($perPage);
+    }
 }
