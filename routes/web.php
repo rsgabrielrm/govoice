@@ -25,6 +25,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('customers', \App\Http\Controllers\CustomerController::class)
         ->except('show');
 
+    Route::resource('numbers', \App\Http\Controllers\NumberController::class)
+        ->except('show');
+
 });
 
 

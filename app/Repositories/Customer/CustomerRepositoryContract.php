@@ -6,5 +6,6 @@ use App\Repositories\BaseRepositoryContract;
 
 interface CustomerRepositoryContract extends BaseRepositoryContract
 {
-    public function getByUserIdAndPaginate($user_id, $perPage = 10);
+    public function getByUserIdAndPaginate($userId, $perPage = 10);
+    public function getCustomerByIdAndUserId($id, $userId);
 }
