@@ -30,6 +30,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('numbers', \App\Http\Controllers\NumberController::class)
         ->except('show');
 
+    Route::prefix('number/{number}')->name('number.')->group(function () {
+        Route::resource('preferences', \App\Http\Controllers\NumberPreferenceController::class)
+            ->except('show');
+    });
+
 });
 
 

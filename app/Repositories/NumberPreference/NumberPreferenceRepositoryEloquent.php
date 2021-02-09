@@ -14,4 +14,16 @@ class NumberPreferenceRepositoryEloquent extends BaseRepository implements Numbe
         $this->model = $model;
     }
 
+    public function getAllNumberPreferencesByNumberIdAndUserIdAndPaginate($numberId, $userId, $perPage = 10)
+    {
+
+        return $this->model->whereHas('number', function ($query) use ($userId){
+                    $query->whereHas('customer', function ($queryCustomer) use ($userId){
+                        $queryCustomer->whereHas('user', function ($queryUser) use ($userId) {
+                            $queryUser->where('user_id', $userId);
+                        });
+                    });
+                })->where('number_id', $numberId)->with('number')->paginate($perPage);
+
+    }
 }
