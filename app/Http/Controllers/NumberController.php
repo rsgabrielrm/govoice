@@ -55,7 +55,7 @@ class NumberController extends Controller
 
         $customers = $this->customerRepository->getByAttribute('user_id',  $userId)->get();
 
-        if (empty($customers)) {
+        if ($customers->isEmpty()) {
             return redirect()->route('customers.create')->withErrors('You must have a registered customer before entering a new number');
         }
 

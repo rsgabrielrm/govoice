@@ -108,7 +108,7 @@ class NumberPreferenceController extends Controller
             return redirect()->route('numbers.index')->withErrors('We did not find the number requested');
         }
 
-        if (! $preference) {
+        if (! isset($preference->id)) {
             return redirect()->route('number.preferences.index', $number->id)->withErrors('We did not find the preference number requested');
         }
 
