@@ -21,7 +21,7 @@
                 @csrf
 
                 <div>
-                    <x-button>
+                    <x-button :light="true">
                         {{ __('Resend Verification Email') }}
                     </x-button>
                 </div>
