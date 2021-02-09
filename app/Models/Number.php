@@ -31,4 +31,21 @@ class Number extends Model
     {
         return $this->hasMany(NumberPreference::class);
     }
+
+    /**
+     * Array with the name of the relations to delete in cascade
+     * @var array
+     */
+    protected static $relationsCascade = ['numberPreferences'];
+
+    protected static function booted()
+    {
+        static::deleting(function($resource) {
+            foreach (static::$relationsCascade as $relation) {
+                foreach ($resource->{$relation}()->get() as $item) {
+                    $item->delete();
+                }
+            }
+        });
+    }
 }

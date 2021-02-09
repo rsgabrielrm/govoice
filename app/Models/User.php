@@ -47,4 +47,21 @@ class User extends Authenticatable
     {
         return $this->hasMany(Customer::class);
     }
+
+    /**
+     * Array with the name of the relations to delete in cascade
+     * @var array
+     */
+    protected static $relationsCascade = ['customers'];
+
+    protected static function booted()
+    {
+        static::deleting(function($resource) {
+            foreach (static::$relationsCascade as $relation) {
+                foreach ($resource->{$relation}()->get() as $item) {
+                    $item->delete();
+                }
+            }
+        });
+    }
 }
