@@ -68,6 +68,10 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
+        if (Auth::user()->id != $customer->user_id) {
+            return redirect()->back()->withErrors('You are not allowed to update the client');
+        }
+
         $statusOptions = Customer::CUSTOMER_STATUS_OPTIONS;
 
         return view('customer.edit', compact('customer', 'statusOptions'));
@@ -83,6 +87,10 @@ class CustomerController extends Controller
     public function update(CustomerUpdateRequest $request, Customer $customer)
     {
         $data = $request->validated();
+
+        if (Auth::user()->id != $customer->user_id) {
+            return redirect()->back()->withErrors('You are not allowed to update the client');
+        }
 
         $this->customerRepository->updateById($data, $customer->id);
 
