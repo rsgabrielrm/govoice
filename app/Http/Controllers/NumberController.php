@@ -93,6 +93,10 @@ class NumberController extends Controller
     {
 
         $userId = Auth::user()->id;
+        if (! $this->numberService->canChangeNumber($number->id, $userId)) {
+            return redirect()->back()->withErrors('You are not allowed to edit the number!');
+        }
+
         $customers = $this->customerRepository->getByAttribute('user_id',  $userId)->get();
 
         $statusOptions = Number::NUMBER_STATUS_OPTIONS;
